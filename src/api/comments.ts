@@ -1,4 +1,4 @@
-import type { Comment } from '../types'
+import type { Comment } from '@/types'
 
 export async function getComments(): Promise<Comment[]> {
   const response = await fetch('https://jsonplaceholder.typicode.com/comments')

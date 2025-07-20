@@ -1,4 +1,4 @@
-import type { Post } from '../types'
+import type { Post } from '@/types'
 
 export async function getPosts(): Promise<Post[]> {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts')
