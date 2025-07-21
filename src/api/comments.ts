@@ -1,6 +1,6 @@
 import type { Comment } from '@/types'
 
-export async function getComments(): Promise<Comment[]> {
+export const fetchComments = async (): Promise<Comment[]> => {
   const response = await fetch('https://jsonplaceholder.typicode.com/comments')
 
   if (!response.ok) {
@@ -11,7 +11,7 @@ export async function getComments(): Promise<Comment[]> {
   return comments
 }
 
-export async function getCommentByPostId(postId: number): Promise<Comment> {
+export const fetchCommentByPostId = async (postId: number): Promise<Comment> => {
   const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
 
   if (!response.ok) {
