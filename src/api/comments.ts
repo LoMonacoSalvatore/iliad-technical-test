@@ -11,7 +11,7 @@ export const fetchComments = async (): Promise<Comment[]> => {
   return comments
 }
 
-export const fetchCommentByPostId = async (postId: number): Promise<Comment> => {
+export const fetchCommentByPostId = async (postId: number): Promise<Comment[]> => {
   const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
 
   if (!response.ok) {

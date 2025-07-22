@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Post } from '@/types'
 import { ref } from 'vue'
+import { useCommentsStore } from '@/stores/comments'
 
 const isEditing = ref<Boolean>(false)
 const editedTitle = ref('')
@@ -29,6 +30,22 @@ const savePost = () => {
   })
   isEditing.value = false
 }
+
+const commentsStore = useCommentsStore()
+
+const selectedPostIds = ref<number[]>([])
+
+const toggleComments = async (postId: number) => {
+  if (!selectedPostIds.value.includes(postId)) {
+    selectedPostIds.value.push(postId)
+  } else {
+    selectedPostIds.value = selectedPostIds.value.filter((id) => id !== postId)
+  }
+
+  if (!commentsStore.comments[postId]) {
+    await commentsStore.loadComments(postId)
+  }
+}
 </script>
 
 <template>
@@ -44,7 +61,22 @@ const savePost = () => {
 
     <button v-if="!isEditing" @click="editPost()">Edit post</button>
     <button v-else @click="savePost()">Save edits</button>
-
     <button @click="emit('deletePost', post.id)">Delete post</button>
+    <button @click="toggleComments(post.id)">
+      {{ selectedPostIds.includes(post.id) ? 'Hide Comments' : 'View Comments' }}
+    </button>
+
+    <div v-if="selectedPostIds.includes(post.id)">
+      <p v-if="commentsStore.isLoading[post.id]">Loading comments...</p>
+      <div v-else>
+        <div v-for="(comment, index) in commentsStore.comments[post.id]" :key="comment.id">
+          {{ index }} - {{ comment.email }}: {{ comment.body }}
+
+          <!-- <button v-if="!isEditing" @click="editPost()">Edit comment</button>
+          <button v-else @click="savePost()">Save edits</button>
+          <button @click="emit('deletePost', post.id)">Delete comment</button> -->
+        </div>
+      </div>
+    </div>
   </div>
 </template>
