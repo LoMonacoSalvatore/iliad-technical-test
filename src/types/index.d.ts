@@ -17,6 +17,11 @@ interface Company {
   bs: string
 }
 
+export interface Info {
+  type: string
+  info: string
+}
+
 export interface User {
   id: number
   name: string

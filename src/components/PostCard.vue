@@ -51,30 +51,50 @@ const toggleComments = async (postId: number) => {
 <template>
   <div>
     <div v-if="!isEditing">
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.body }}</p>
+      <h3 class="font-bold capitalize mb-2 text-lg">{{ post.title }}</h3>
+      <p class="capitalize">{{ post.body }}</p>
     </div>
     <div v-else>
-      <input v-model="editedTitle" type="text" placeholder="Title" />
-      <input v-model="editedBody" type="textarea" placeholder="Body" />
+      <input
+        class="w-full p-2 border rounded mb-2 block"
+        v-model="editedTitle"
+        type="text"
+        placeholder="Title"
+      />
+      <textarea class="w-full p-2 border rounded block" v-model="editedBody" placeholder="Body" />
     </div>
 
-    <button v-if="!isEditing" @click="editPost()">Edit post</button>
-    <button v-else @click="savePost()">Save edits</button>
-    <button @click="emit('deletePost', post.id)">Delete post</button>
-    <button @click="toggleComments(post.id)">
-      {{ selectedPostIds.includes(post.id) ? 'Hide Comments' : 'View Comments' }}
-    </button>
+    <div class="mt-4 flex gap-2">
+      <button class="button hover:bg-yellow-200!" v-if="!isEditing" @click="editPost()">
+        Edit post
+      </button>
+      <button class="button hover:bg-green-200!" v-else @click="savePost()">Save edits</button>
+      <button class="button hover:bg-red-200!" @click="emit('deletePost', post.id)">
+        Delete post
+      </button>
+      <button class="button" @click="toggleComments(post.id)">
+        {{ selectedPostIds.includes(post.id) ? 'Hide Comments' : 'View Comments' }}
+      </button>
+    </div>
 
-    <div v-if="selectedPostIds.includes(post.id)">
+    <div v-if="selectedPostIds.includes(post.id)" class="mt-4">
       <p v-if="commentsStore.isLoading[post.id]">Loading comments...</p>
       <div v-else>
-        <div v-for="(comment, index) in commentsStore.comments[post.id]" :key="comment.id">
-          {{ index }} - {{ comment.email }}: {{ comment.body }}
+        <h3 class="text-md mb-2 font-bold">Comments</h3>
+        <div
+          v-for="comment in commentsStore.comments[post.id]"
+          :key="`comment-${comment.id}`"
+          class="border rounded p-2 mb-2 flex justify-between"
+        >
+          <div class="flex flex-col justify-between">
+            <p class="capitalize mb-2 md:max-w-3/4">{{ comment.body }}</p>
+            <span>Author: {{ comment.email }}</span>
+          </div>
 
-          <!-- <button v-if="!isEditing" @click="editPost()">Edit comment</button>
-          <button v-else @click="savePost()">Save edits</button>
-          <button @click="emit('deletePost', post.id)">Delete comment</button> -->
+          <div class="flex flex-col">
+            <button class="button mb-2 hover:bg-yellow-200!">Edit</button>
+            <button class="button hover:bg-red-200!">Delete</button>
+          </div>
         </div>
       </div>
     </div>
