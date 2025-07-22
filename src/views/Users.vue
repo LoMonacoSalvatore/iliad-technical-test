@@ -16,13 +16,11 @@ const { user } = storeToRefs(store)
 </script>
 
 <template>
-  <div>User's infos</div>
-
   <div v-if="!user">No Users present</div>
 
   <div v-else>
     <UserCard :user="user" />
-    <RouterLink :to="{ name: 'posts', params: { id: user.id } }"
+    <RouterLink class="button block w-fit mt-4" :to="{ name: 'posts', params: { id: user.id } }"
       >View {{ user.username }}'s posts</RouterLink
     >
   </div>

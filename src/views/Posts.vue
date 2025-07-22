@@ -16,10 +16,11 @@ const { currentPosts, isLoading: isLoadingPosts } = storeToRefs(postsStore)
 </script>
 
 <template>
-  <div>Posts</div>
-  <div v-if="isLoadingPosts">...</div>
+  <h2 class="text-xl font-bold pb-2">Posts</h2>
+  <div v-if="isLoadingPosts">Loading posts</div>
   <div v-else v-for="post in currentPosts" :key="`post-${post.id}`">
     <PostCard
+      class="border rounded p-2 mb-"
       :post="post"
       @edit-post="(post) => postsStore.editPost(post)"
       @delete-post="(postId) => postsStore.deletePost(postId)"

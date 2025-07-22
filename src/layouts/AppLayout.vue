@@ -4,5 +4,7 @@ import Header from '@/components/Header.vue'
 
 <template>
   <Header />
-  <slot />
+  <div class="container mx-auto px-4">
+    <slot />
+  </div>
 </template>
