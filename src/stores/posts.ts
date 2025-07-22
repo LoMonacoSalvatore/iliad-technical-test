@@ -32,6 +32,17 @@ export const usePostsStore = defineStore('posts', () => {
     }
   }
 
+  const editPost = (updatedPost: Post) => {
+    const userId = updatedPost.userId
+    const userPosts = posts.value[userId]
+    if (!userPosts) return
+
+    const index = userPosts.findIndex((post) => post.id === updatedPost.id)
+    if (index !== -1) {
+      userPosts[index] = updatedPost
+    }
+  }
+
   const deletePost = (postId: number) => {
     for (const userId in posts.value) {
       const postList = posts.value[userId]
@@ -50,6 +61,7 @@ export const usePostsStore = defineStore('posts', () => {
     isLoading,
     error,
     loadPosts,
+    editPost,
     deletePost,
   }
 })

@@ -19,7 +19,11 @@ const { currentPosts, isLoading } = storeToRefs(store)
   <div>Posts</div>
   <div v-if="isLoading">...</div>
   <div v-else v-for="post in currentPosts" :key="`post-${post.id}`">
-    <PostCard :post="post" @delete-post="(postId) => store.deletePost(postId)" />
+    <PostCard
+      :post="post"
+      @edit-post="(post) => store.editPost(post)"
+      @delete-post="(postId) => store.deletePost(postId)"
+    />
   </div>
   <div v-show="!currentPosts.length">No posts available</div>
 </template>
