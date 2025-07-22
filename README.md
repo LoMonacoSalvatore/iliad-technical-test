@@ -38,11 +38,13 @@ bun run build
 bun test:unit
 ```
 
+The unit test present tests actions of the /stores/users.ts
+
 ### Run End-to-End Tests with [Playwright](https://playwright.dev)
 
 ```sh
 # Install browsers for the first run
-npx playwright install
+bunx playwright install
 
 # When testing on CI, must build the project first
 bun run build
@@ -56,6 +58,18 @@ bun test:e2e tests/example.spec.ts
 # Runs the tests in debug mode
 bun test:e2e --debug
 ```
+
+During the E2E test, the flow tested is the following:
+
+- Land on Homepage
+- Search for the User card
+- If present, click on it
+- Navigate to user page
+- Search for the "View users's posts" button and click on it if visible
+- Navigate to posts page
+- Search for Post cards and count them to save the initial value
+- Search for the delete button and click on it
+- Final result is the post cards's initial value is lower than the current count
 
 ### Lint with [ESLint](https://eslint.org/)
 

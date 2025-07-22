@@ -42,6 +42,7 @@ const filteredUsers = computed(() => {
           v-for="user in filteredUsers"
           :key="`user-${user.id}`"
           class="button"
+          data-testid="user-card"
           @click="router.push({ name: 'user', params: { id: user.id } })"
         >
           <span>{{ user.name }}</span>

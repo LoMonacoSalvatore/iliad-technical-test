@@ -20,7 +20,10 @@ const { user } = storeToRefs(store)
 
   <div v-else>
     <UserCard :user="user" />
-    <RouterLink class="button block w-fit mt-4" :to="{ name: 'posts', params: { id: user.id } }"
+    <RouterLink
+      data-testid="view-posts-button"
+      class="button block w-fit mt-4"
+      :to="{ name: 'posts', params: { id: user.id } }"
       >View {{ user.username }}'s posts</RouterLink
     >
   </div>

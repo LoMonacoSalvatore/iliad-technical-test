@@ -20,6 +20,7 @@ const { currentPosts, isLoading: isLoadingPosts } = storeToRefs(postsStore)
   <div v-if="isLoadingPosts">Loading posts</div>
   <div v-else v-for="post in currentPosts" :key="`post-${post.id}`">
     <PostCard
+      data-testid="post-card"
       class="border rounded p-2 mb-2"
       :post="post"
       @edit-post="(post) => postsStore.editPost(post)"
