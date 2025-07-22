@@ -62,3 +62,29 @@ bun test:e2e --debug
 ```sh
 bun lint
 ```
+
+## 🐳 Run with Docker Compose
+
+The project includes a `docker-compose.yml` file for easy setup.
+
+### Step 1: Build the app locally
+
+Since the container is for serving static files, build the app locally first:
+
+```bash
+bun run build
+```
+
+### Step 2: Run the container
+
+```bash
+docker-compose up --build
+```
+
+Your Vue 3 app will be available at: http://localhost:8080
+
+### Step 3: Stop the container
+
+```bash
+docker-compose down
+```
