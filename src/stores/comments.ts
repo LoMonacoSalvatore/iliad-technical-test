@@ -39,17 +39,17 @@ export const useCommentsStore = defineStore('comments', () => {
     }
   }
 
-  const deleteComment = (postId: number) => {
-    for (const postId in comments.value) {
-      const postList = comments.value[postId]
-      const index = postList.findIndex((post) => post.id === postId)
+  // const deleteComment = (postId: number) => {
+  //   for (const postId in comments.value) {
+  //     const postList = comments.value[postId]
+  //     const index = postList.findIndex((post) => post.id === Number(postId))
 
-      if (index !== -1) {
-        postList.splice(index, 1)
-        break
-      }
-    }
-  }
+  //     if (index !== -1) {
+  //       postList.splice(index, 1)
+  //       break
+  //     }
+  //   }
+  // }
 
   return {
     comments,
@@ -57,6 +57,6 @@ export const useCommentsStore = defineStore('comments', () => {
     error,
     loadComments,
     editComment,
-    deleteComment,
+    // deleteComment,
   }
 })
