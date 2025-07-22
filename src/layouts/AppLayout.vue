@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import Header from '@/components/Header.vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
 </script>
 
 <template>
