@@ -69,7 +69,11 @@ const toggleComments = async (postId: number) => {
         Edit post
       </button>
       <button class="button hover:bg-green-200!" v-else @click="savePost()">Save edits</button>
-      <button class="button hover:bg-red-200!" @click="emit('deletePost', post.id)">
+      <button
+        data-testid="delete-post-button"
+        class="button hover:bg-red-200!"
+        @click="emit('deletePost', post.id)"
+      >
         Delete post
       </button>
       <button class="button" @click="toggleComments(post.id)">
