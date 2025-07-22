@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useQuery } from '@pinia/colada'
-import { fetchUsers } from '@/api/users'
 import type { User } from '../types'
+import { storeToRefs } from 'pinia'
+import { useUsersStore } from '@/stores/users'
 
-const { state: users, asyncStatus } = useQuery({
-  key: ['users'],
-  query: fetchUsers,
-})
+const store = useUsersStore()
+const { users, isLoading, error } = storeToRefs(store)
+
+if (!users.value.length) store.loadUsers()
 
 const searchQuery = ref('')
 
 const filteredUsers = computed(() => {
   if (!searchQuery.value.trim()) {
-    return users.value.data
+    return users.value
   }
 
-  return users?.value?.data?.filter((user) =>
+  return users?.value?.filter((user) =>
     user.name.toLowerCase().includes(searchQuery.value.toLowerCase()),
   ) as User[]
 })
@@ -31,11 +31,13 @@ const filteredUsers = computed(() => {
       class="w-full p-2 border rounded mb-4"
     />
 
-    <div v-if="asyncStatus === 'loading'">loading</div>
-    <div v-if="users.error">error</div>
-    <div v-else-if="users.data">
-      <div v-for="user in filteredUsers">
-        <RouterLink :to="{ name: 'user', params: { id: user.id } }">{{ user.name }}</RouterLink>
+    <div>
+      <div v-if="isLoading">Loading…</div>
+      <div v-if="error">❌ {{ error.message }}</div>
+      <div v-else>
+        <div v-for="user in filteredUsers" :key="user.id">
+          <RouterLink :to="{ name: 'user', params: { id: user.id } }">{{ user.name }}</RouterLink>
+        </div>
       </div>
     </div>
   </main>
