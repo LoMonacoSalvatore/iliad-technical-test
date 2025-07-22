@@ -30,14 +30,14 @@ export interface User {
 
 export interface Post {
   userId: number
-  id: string
+  id: number
   title: string
   body: string
 }
 
 export interface Comment {
   postId: number
-  id: string
+  id: number
   name: string
   email: string
   body: string

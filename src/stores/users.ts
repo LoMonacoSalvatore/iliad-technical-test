@@ -2,11 +2,8 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { fetchUserById, fetchUsers } from '@/api/users'
 import type { User } from '@/types'
-import { useRoute } from 'vue-router'
 
 export const useUsersStore = defineStore('users', () => {
-  const route = useRoute()
-
   const users = ref<User[]>([])
   const user = ref<User>()
   const isLoading = ref(false)
@@ -36,11 +33,11 @@ export const useUsersStore = defineStore('users', () => {
     }
   }
 
-  const initUsers = () => {
+  const initUsers = (paramId: string) => {
     if (!users.value.length) {
-      loadUser(route.params.id as string)
+      loadUser(paramId)
     } else {
-      user.value = users.value.find((user) => user.id === Number(route.params.id))
+      user.value = users.value.find((user) => user.id === Number(paramId))
     }
   }
 
