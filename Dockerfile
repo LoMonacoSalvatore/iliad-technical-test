@@ -10,13 +10,13 @@ RUN bun install --frozen-lockfile
 COPY . .
 
 # Build the app
-RUN bun run build && ls -la /dist
+RUN bun run build
 
 # Step 2: Serve the static files with Nginx
 FROM nginx:alpine
 
 # Copy your built app into Nginx public directory
-COPY --from=builder /dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
