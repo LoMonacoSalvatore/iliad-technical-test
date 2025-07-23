@@ -5,6 +5,7 @@ import type { Comment } from '@/types'
 
 export const useCommentsStore = defineStore('comments', () => {
   const comments = ref<Record<number, Comment[]>>({})
+  const selectedPostIds = ref<number[]>([])
   const isLoading = ref<Record<number, boolean>>({})
   const error = ref<Error | null>(null)
 
@@ -28,6 +29,18 @@ export const useCommentsStore = defineStore('comments', () => {
     }
   }
 
+  const toggleComments = async (postId: number) => {
+    if (!selectedPostIds.value.includes(postId)) {
+      selectedPostIds.value.push(postId)
+    } else {
+      selectedPostIds.value = selectedPostIds.value.filter((id) => id !== postId)
+    }
+
+    if (!comments.value[postId]) {
+      await loadComments(postId)
+    }
+  }
+
   const editComment = (updatedComment: Comment) => {
     const postId = updatedComment.postId
     const userComments = comments.value[postId]
@@ -39,24 +52,20 @@ export const useCommentsStore = defineStore('comments', () => {
     }
   }
 
-  // const deleteComment = (postId: number) => {
-  //   for (const postId in comments.value) {
-  //     const postList = comments.value[postId]
-  //     const index = postList.findIndex((post) => post.id === Number(postId))
+  const deleteComment = (postId: number, commentId: number) => {
+    const commentsList = comments.value[postId]
 
-  //     if (index !== -1) {
-  //       postList.splice(index, 1)
-  //       break
-  //     }
-  //   }
-  // }
+    comments.value[postId] = commentsList.filter((comment) => comment.id !== commentId)
+  }
 
   return {
     comments,
+    selectedPostIds,
     isLoading,
     error,
     loadComments,
+    toggleComments,
     editComment,
-    // deleteComment,
+    deleteComment,
   }
 })
