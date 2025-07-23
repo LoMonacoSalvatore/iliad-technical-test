@@ -14,11 +14,12 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  build: {
-    rollupOptions: {
-      input: {
-        main: 'src/main.ts',
-      },
+  server: {
+    host: true, // listen on 0.0.0.0
+    port: 5173, // or your preferred port
+    strictPort: true, // fail if port is taken
+    watch: {
+      usePolling: true, // works well inside Docker
     },
   },
 })

@@ -1,7 +1,7 @@
 # Install dependencies and build the app locally
 build:
-	bun install
-	bun run build
+	npm install
+	npm run build
 
 # Build and run the container using Docker Compose
 docker:

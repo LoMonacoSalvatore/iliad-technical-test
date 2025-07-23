@@ -17,25 +17,25 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 ## Project Setup
 
 ```sh
-bun install
+npm install
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-bun dev
+npm dev
 ```
 
 ### Type-Check, Compile and Minify for Production
 
 ```sh
-bun run build
+npm run build
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
-bun test:unit
+npm test:unit
 ```
 
 The unit test present tests actions of the /stores/users.ts
@@ -44,19 +44,19 @@ The unit test present tests actions of the /stores/users.ts
 
 ```sh
 # Install browsers for the first run
-bunx playwright install
+npmx playwright install
 
 # When testing on CI, must build the project first
-bun run build
+npm run build
 
 # Runs the end-to-end tests
-bun test:e2e
+npm test:e2e
 # Runs the tests only on Chromium
-bun test:e2e --project=chromium
+npm test:e2e --project=chromium
 # Runs the tests of a specific file
-bun test:e2e tests/example.spec.ts
+npm test:e2e tests/example.spec.ts
 # Runs the tests in debug mode
-bun test:e2e --debug
+npm test:e2e --debug
 ```
 
 During the E2E test, the flow tested is the following:
@@ -74,7 +74,7 @@ During the E2E test, the flow tested is the following:
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
-bun lint
+npm lint
 ```
 
 ## 🐳 Run with Docker Compose
@@ -86,8 +86,8 @@ The project includes a `docker-compose.yml` file for easy setup.
 Since the container is for serving static files, build the app locally first:
 
 ```bash
-bun install
-bun run build
+npm install
+npm run build
 ```
 
 ### Step 2: Run the container
