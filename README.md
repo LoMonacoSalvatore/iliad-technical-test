@@ -86,6 +86,7 @@ The project includes a `docker-compose.yml` file for easy setup.
 Since the container is for serving static files, build the app locally first:
 
 ```bash
+bun install
 bun run build
 ```
 
