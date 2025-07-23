@@ -10,12 +10,17 @@ const paramId = computed(() => route.params.id)
 
 const postsStore = usePostsStore()
 
-postsStore.loadPosts(paramId.value as string)
+postsStore.loadPosts(Number(paramId.value))
 
 const { currentPosts, isLoading: isLoadingPosts } = storeToRefs(postsStore)
 </script>
 
 <template>
+  <RouterLink
+    class="hover:underline mb-4 button block w-fit"
+    :to="{ name: 'user', params: { id: route.params.id } }"
+    >Back</RouterLink
+  >
   <h2 class="text-xl font-bold pb-2">Posts</h2>
   <div v-if="isLoadingPosts">Loading posts</div>
   <div v-else v-for="post in currentPosts" :key="`post-${post.id}`">

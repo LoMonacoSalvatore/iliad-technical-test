@@ -7,7 +7,7 @@ export const usePostsStore = defineStore('posts', () => {
   const posts = ref<Record<number, Post[]>>({})
   const isLoading = ref(false)
   const error = ref<Error | null>(null)
-  const _userId = ref<string>()
+  const _userId = ref<number>()
 
   const currentPosts = computed(() => posts.value[Number(_userId.value)] || [])
 
@@ -15,14 +15,14 @@ export const usePostsStore = defineStore('posts', () => {
     return userId in posts.value
   }
 
-  const loadPosts = async (userId: string) => {
+  const loadPosts = async (userId: number) => {
     isLoading.value = true
     error.value = null
     try {
       _userId.value = userId
-      if (hasLoadedPosts(Number(userId))) return
+      if (hasLoadedPosts(userId)) return
 
-      const res = await fetchPostByUserId(userId as string)
+      const res = await fetchPostByUserId(userId)
 
       posts.value[Number(userId)] = res
     } catch (err: any) {

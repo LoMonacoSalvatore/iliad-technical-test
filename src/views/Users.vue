@@ -12,19 +12,22 @@ const store = useUsersStore()
 
 store.initUsers(paramId.value as string)
 
-const { user } = storeToRefs(store)
+const { user, isLoading } = storeToRefs(store)
 </script>
 
 <template>
-  <div v-if="!user">No Users present</div>
-
+  <div v-if="isLoading">Loading...</div>
   <div v-else>
-    <UserCard :user="user" />
-    <RouterLink
-      data-testid="view-posts-button"
-      class="button block w-fit mt-4"
-      :to="{ name: 'posts', params: { id: user.id } }"
-      >View {{ user.username }}'s posts</RouterLink
-    >
+    <div v-if="!user">No Users present</div>
+
+    <div v-else>
+      <UserCard :user="user" />
+      <RouterLink
+        data-testid="view-posts-button"
+        class="button block w-fit mt-4"
+        :to="{ name: 'posts', params: { id: user.id } }"
+        >View {{ user.username }}'s posts</RouterLink
+      >
+    </div>
   </div>
 </template>
