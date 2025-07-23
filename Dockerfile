@@ -10,7 +10,6 @@ RUN bun install --frozen-lockfile
 COPY . .
 
 # Build the app
-RUN ls -R /app && cat /app/index.html && ls -la /app/src
 RUN bun run build
 
 # Step 2: Serve the static files with Nginx
