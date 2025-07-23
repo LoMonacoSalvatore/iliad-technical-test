@@ -1,6 +1,6 @@
 # iliad-technical-test
 
-This template should help get you started developing with Vue 3 in Vite.
+Technical test for iliad. Simple web app that fetches data from multiple APIs and manipulates the responses using Pinia state manager.
 
 ## Recommended IDE Setup
 
