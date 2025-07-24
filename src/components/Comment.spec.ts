@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import CommentItem from '@/components/Comment.vue' // adjust path
+import CommentComponent from '@/components/Comment.vue' // adjust path
 import type { Comment } from '@/types'
 
-describe('CommentItem.vue', () => {
+describe('CommentComponent.vue', () => {
   let comment: Comment
   let wrapper: ReturnType<typeof mount>
 
@@ -11,7 +11,7 @@ describe('CommentItem.vue', () => {
 
   beforeEach(() => {
     comment = mockComment
-    wrapper = mount(CommentItem, {
+    wrapper = mount(CommentComponent, {
       props: { comment },
     })
   })

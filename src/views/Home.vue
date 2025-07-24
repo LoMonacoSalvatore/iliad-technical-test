@@ -28,6 +28,7 @@ const filteredUsers = computed(() => {
 <template>
   <main>
     <input
+      data-testid="search-input"
       type="text"
       v-model="searchQuery"
       placeholder="Search by name..."

@@ -23,7 +23,7 @@ npm install
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm dev
+npm run dev
 ```
 
 ### Type-Check, Compile and Minify for Production
@@ -35,47 +35,41 @@ npm run build
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
-npm test:unit
+npm run test:unit
+
+# Generates coverage report
+npm run coverage
 ```
 
-The unit test present tests actions of the /stores/users.ts
+Unit Tests:
+
+- stores/users.spec.ts
+- components/Comment.spec.ts
+- composables/useCommentActions.spec.ts
 
 ### Run End-to-End Tests with [Playwright](https://playwright.dev)
 
 ```sh
 # Install browsers for the first run
-npmx playwright install
+npx playwright install
 
 # When testing on CI, must build the project first
 npm run build
 
 # Runs the end-to-end tests
-npm test:e2e
+npm run test:e2e
 # Runs the tests only on Chromium
-npm test:e2e --project=chromium
+npm run test:e2e --project=chromium
 # Runs the tests of a specific file
-npm test:e2e tests/example.spec.ts
+npm run test:e2e tests/example.spec.ts
 # Runs the tests in debug mode
-npm test:e2e --debug
+npm run test:e2e --debug
 ```
 
-During the E2E test, the flow tested is the following:
+E2E tests:
 
-- Land on Homepage
-- Search for the User card
-- If present, click on it
-- Navigate to user page
-- Search for the "View users's posts" button and click on it if visible
-- Navigate to posts page
-- Search for Post cards and count them to save the initial value
-- Search for the delete button and click on it
-- Final result is the post cards's initial value is lower than the current count
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm lint
-```
+- Search user flow
+- Delete post flow
 
 ## 🐳 Run with Docker Compose
 

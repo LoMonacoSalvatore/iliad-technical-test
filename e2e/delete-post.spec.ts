@@ -6,7 +6,7 @@ test('Delete post flow', async ({ page }) => {
   const userCards = page.getByTestId('user-card')
   await page.waitForSelector('[data-testid="user-card"]')
   const userCardsCount = await userCards.count()
-  await expect(userCardsCount).toBeGreaterThan(0)
+  expect(userCardsCount).toBeGreaterThan(0)
 
   await userCards.first().click()
 
