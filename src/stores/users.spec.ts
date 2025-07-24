@@ -5,7 +5,6 @@ import type { User } from '@/types'
 import { vi, describe, beforeEach, it, expect } from 'vitest'
 import * as api from '@/api/users'
 
-// Mock API module
 vi.mock('@/api/users', () => ({
   fetchUsers: vi.fn<() => Promise<User[]>>(),
   fetchUserById: vi.fn<(id: string) => Promise<User>>(),
